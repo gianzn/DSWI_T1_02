@@ -1,0 +1,42 @@
+﻿@model DSWI_T1_01.Models.ConsumoElectricoViewModel
+
+@{
+    ViewData["Title"] = "Consumo Eléctrico";
+}
+
+<div class="container mt-4">
+    <h2>Cálculo de Consumo Mensual de Energía</h2>
+    <hr />
+
+    <form asp-action="ConsumoElectrico" method="post" class="row g-3">
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-6">
+            <label asp-for="KwhConsumidos" class="form-label"></label>
+            <input asp-for="KwhConsumidos" type="number" step="any" class="form-control" placeholder="Ingrese los kWh consumidos" />
+            <span asp-validation-for="KwhConsumidos" class="text-danger"></span>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Calcular</button>
+        </div>
+    </form>
+
+    @if (Model.Calculado)
+    {
+        <div class="card mt-4 col-md-6">
+            <div class="card-header fw-bold">Resultado</div>
+            <div class="card-body">
+                <p class="mb-1"><strong>kWh consumidos:</strong> @Model.KwhConsumidos</p>
+                <p class="mb-1"><strong>Subtotal:</strong> @Model.Subtotal.ToString("0.00")</p>
+                <p class="mb-1"><strong>Impuesto (@Model.PorcentajeImpuesto.ToString("0")%):</strong> @Model.MontoImpuesto.ToString("0.00")</p>
+                <hr />
+                <p class="mb-0 fs-5"><strong>Total a pagar:</strong> @Model.TotalPagar.ToString("0.00")</p>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
