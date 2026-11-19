@@ -1,4 +1,4 @@
-# DSWI_T1_01
+# DSWI_T1_02 -  GRUPO 2
 Evaluación T1 - Desarrollo de Servicios Web I - Cibertec
 
 Division del examen T1:
