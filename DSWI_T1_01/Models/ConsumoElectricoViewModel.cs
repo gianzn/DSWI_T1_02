@@ -13,6 +13,6 @@ namespace DSWI_T1_01.Models
         public decimal PorcentajeImpuesto { get; set; }
         public decimal MontoImpuesto { get; set; }
         public decimal TotalPagar { get; set; }
-        public bool Calculado { get; Set; }
+        public bool Calculado { get; set; }
     }
 }
