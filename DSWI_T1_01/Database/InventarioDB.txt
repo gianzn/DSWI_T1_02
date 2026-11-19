@@ -1,0 +1,34 @@
+CREATE DATABASE InventarioBD;
+GO
+
+-- Usar la base de datos
+USE InventarioBD;
+GO
+
+-- Crear tablas
+CREATE TABLE Productos (
+    ProductoID INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(100),
+    Categoria NVARCHAR(50)
+);
+
+CREATE TABLE Inventario (
+    InventarioID INT PRIMARY KEY IDENTITY(1,1),
+    FechaIngreso DATE,
+    Cantidad INT,
+    Ubicacion NVARCHAR(100),
+    Estado NVARCHAR(50),
+    ProductoID INT,
+    FOREIGN KEY (ProductoID) REFERENCES Productos(ProductoID)
+);
+
+-- Insertar registros
+INSERT INTO Productos (Nombre, Categoria)
+VALUES ('Laptop HP', 'Tecnología'),
+       ('Mesa de Oficina', 'Muebles'),
+       ('Silla Ergonómica', 'Muebles');
+
+INSERT INTO Inventario (FechaIngreso, Cantidad, Ubicacion, Estado, ProductoID)
+VALUES ('2025-04-01', 10, 'Almacén A', 'Disponible', 1),
+       ('2025-04-02', 5, 'Almacén B', 'Disponible', 2),
+       ('2025-04-03', 8, 'Almacén B', 'Dañado', 3);
