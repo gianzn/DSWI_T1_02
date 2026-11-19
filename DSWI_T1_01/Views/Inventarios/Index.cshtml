@@ -1,0 +1,198 @@
+﻿@model IEnumerable<DSWI_T1_01.Models.Inventario>
+
+@{
+    ViewData["Title"] = "Mantenimiento de Inventario";
+
+    var productos = ViewBag.Productos as List<DSWI_T1_01.Models.Producto>
+        ?? new List<DSWI_T1_01.Models.Producto>();
+}
+
+<h2 class="mb-4">Mantenimiento de Inventario</h2>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Mensaje"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Registrar nuevo inventario</h5>
+    </div>
+
+    <div class="card-body">
+        <form asp-controller="Inventarios"
+              asp-action="Crear"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label class="form-label">Fecha de ingreso</label>
+                <input type="date"
+                       name="fechaIngreso"
+                       class="form-control"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Cantidad</label>
+                <input type="number"
+                       name="cantidad"
+                       class="form-control"
+                       min="1"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ubicación</label>
+                <input type="text"
+                       name="ubicacion"
+                       class="form-control"
+                       maxlength="100"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Estado</label>
+                <select name="estado" class="form-select" required>
+                    <option value="">Seleccione un estado</option>
+                    <option value="Disponible">Disponible</option>
+                    <option value="Dañado">Dañado</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Producto</label>
+                <select name="productoId" class="form-select" required>
+                    <option value="">Seleccione un producto</option>
+
+                    @foreach (var producto in productos)
+                    {
+                        <option value="@producto.ProductoId">
+                            @producto.Nombre
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Registrar inventario
+            </button>
+        </form>
+    </div>
+</div>
+
+<h4 class="mb-3">Listado de Inventario</h4>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Ubicación</th>
+                <th>Estado</th>
+                <th>Producto</th>
+                <th>Editar inventario</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var fecha = item.FechaIngreso?.ToString("yyyy-MM-dd");
+
+                <tr>
+                    <td>@item.InventarioId</td>
+                    <td>@item.FechaIngreso</td>
+                    <td>@item.Cantidad</td>
+                    <td>@item.Ubicacion</td>
+                    <td>@item.Estado</td>
+                    <td>@item.ProductoId</td>
+
+                    <td>
+                        <form asp-controller="Inventarios"
+                              asp-action="Editar"
+                              method="post">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden"
+                                   name="inventarioId"
+                                   value="@item.InventarioId" />
+
+                            <label>Fecha</label>
+                            <input type="date"
+                                   name="fechaIngreso"
+                                   value="@fecha"
+                                   class="form-control mb-2"
+                                   required />
+
+                            <label>Cantidad</label>
+                            <input type="number"
+                                   name="cantidad"
+                                   value="@item.Cantidad"
+                                   class="form-control mb-2"
+                                   min="1"
+                                   required />
+
+                            <label>Ubicación</label>
+                            <input type="text"
+                                   name="ubicacion"
+                                   value="@item.Ubicacion"
+                                   class="form-control mb-2"
+                                   maxlength="100"
+                                   required />
+
+                            <label>Estado</label>
+                            <input type="text"
+                                   name="estado"
+                                   value="@item.Estado"
+                                   class="form-control mb-2"
+                                   maxlength="50"
+                                   required />
+
+                            <label>Producto</label>
+                            <select name="productoId"
+                                    class="form-select mb-2"
+                                    required>
+
+                                @foreach (var producto in productos)
+                                {
+                                    if (producto.ProductoId == item.ProductoId)
+                                    {
+                                        <option value="@producto.ProductoId"
+                                                selected="selected">
+                                            @producto.Nombre
+                                        </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@producto.ProductoId">
+                                            @producto.Nombre
+                                        </option>
+                                    }
+                                }
+                            </select>
+
+                            <button type="submit"
+                                    class="btn btn-warning btn-sm">
+                                Guardar cambios
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

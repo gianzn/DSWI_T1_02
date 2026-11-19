@@ -9,5 +9,9 @@ namespace DSWI_T1_01.Services
         Task<List<Producto>> ObtenerTodosAsync();
 
         Task<Producto?> ObtenerPorIdAsync(int id);
+
+        Task CrearAsync(Producto producto);
+
+        Task EditarAsync(Producto producto);
     }
 }

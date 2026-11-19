@@ -9,5 +9,9 @@ namespace DSWI_T1_01.Services
         Task<List<Inventario>> ObtenerTodosAsync();
 
         Task<Inventario?> ObtenerPorIdAsync(int id);
+
+        Task CrearAsync(Inventario inventario);
+
+        Task EditarAsync(Inventario inventario);
     }
 }
