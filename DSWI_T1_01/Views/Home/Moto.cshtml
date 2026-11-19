@@ -1,0 +1,33 @@
+@model IEnumerable<DSWI_T1_01.Models.ComprarMoto>
+@{
+    ViewData["Title"] = "Descuentos para la compra de una moto";
+    decimal precioMoto = ViewBag.PrecioMoto;
+}
+
+<h1>Descuentos para la compra de una moto</h1>
+<p>Precio de la moto en dólares: <strong>US$ @precioMoto.ToString("N2")</strong></p>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <caption class="visually-hidden">Comparación de las opciones de compra</caption>
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Opción de compra</th>
+                <th scope="col" class="text-end">Descuento</th>
+                <th scope="col" class="text-end">Ahorro</th>
+                <th scope="col" class="text-end">Total a pagar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var opcion in Model)
+            {
+                <tr>
+                    <th scope="row">@opcion.Dia</th>
+                    <td class="text-end">@(opcion.PorcentajeDescuento)%</td>
+                    <td class="text-end">US$ @opcion.ImporteDescuento.ToString("N2")</td>
+                    <td class="text-end fw-bold">US$ @opcion.TotalAPagar.ToString("N2")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
