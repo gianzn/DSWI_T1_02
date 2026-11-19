@@ -6,7 +6,7 @@ namespace DSWI_T1_01.Controllers
     public class ConsumoElectricoController : Controller
     {
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult ConsumoElectrico()
         {
             return View(new ConsumoElectricoViewModel());
         }
