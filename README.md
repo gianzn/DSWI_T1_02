@@ -8,6 +8,6 @@ Division del examen T1:
 
 amarillo: JORGE LUIS ALARCON CABRERA//
 naranja: KEVIN//
-verde: ADRIAN//
+verde: GIANCARLOS ADRIAN ASCANOA ACOSTA//
 fucsia: BRADH
 
