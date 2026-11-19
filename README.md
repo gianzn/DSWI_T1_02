@@ -9,5 +9,5 @@ Division del examen T1:
 amarillo: JORGE LUIS ALARCON CABRERA//
 naranja: KEVIN//
 verde: GIANCARLOS ADRIAN ASCANOA ACOSTA//
-fucsia: BRADH
+fucsia: BRADH SOLANO BARRIONUEVO
 
