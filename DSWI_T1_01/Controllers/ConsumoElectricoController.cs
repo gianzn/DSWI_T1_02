@@ -13,7 +13,7 @@ namespace DSWI_T1_01.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(ConsumoElectricoViewModel model)
+        public IActionResult ConsumoElectrico(ConsumoElectricoViewModel model)
         {
             if (!ModelState.IsValid)
             {
